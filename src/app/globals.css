@@ -28,7 +28,6 @@
 html,
 body {
   @apply bg-creme text-olive antialiased font-sans;
-  scroll-behavior: smooth;
 }
 
 h1,
@@ -38,4 +37,13 @@ h4,
 h5,
 h6 {
   @apply font-serif;
+}
+
+/* Hide scrollbar for cleaner UI */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

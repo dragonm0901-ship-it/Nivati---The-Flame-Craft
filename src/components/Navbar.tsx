@@ -20,9 +20,12 @@ export default function Navbar() {
   const { cart, setIsCartOpen, isNightMode, setIsNightMode } = useAppContext();
 
   useEffect(() => {
-    setIsMobileMenuOpen(false);
-    setIsQuizOpen(false);
-    setIsSearchOpen(false);
+    const timer = setTimeout(() => {
+      setIsMobileMenuOpen(false);
+      setIsQuizOpen(false);
+      setIsSearchOpen(false);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -42,12 +45,12 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="max-w-7xl mx-auto px-6 h-28 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-16 md:h-18 flex items-center justify-between">
           <Link href="/" className="flex items-center z-50 transform hover:scale-105 transition-transform duration-300">
             <img 
               src="/images/logo.png" 
               alt="Nivati Logo" 
-              className="h-24 w-24 md:h-28 md:w-28 object-contain dark:brightness-0 dark:invert transition-all" 
+              className="h-10 w-10 md:h-12 md:w-12 object-contain   transition-all" 
             />
           </Link>
           
@@ -59,27 +62,34 @@ export default function Navbar() {
               </Link>
               
               {/* Mega Menu Dropdown */}
-              <div className="absolute top-full -left-12 w-[600px] bg-creme dark:bg-[#1a1a1a] shadow-2xl rounded-2xl p-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 grid grid-cols-3 gap-6 translate-y-4 group-hover:translate-y-0 border border-olive/10 dark:border-creme/10 z-50">
+              <div className="absolute top-full -left-12 w-[800px] bg-creme  shadow-2xl rounded-2xl p-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 grid grid-cols-4 gap-6 translate-y-4 group-hover:translate-y-0 border border-olive/10  z-50">
                 <Link href="/shop?category=Signature+Candles" className="group/item block">
-                  <div className="aspect-square bg-olive/5 dark:bg-white/5 rounded-xl overflow-hidden mb-3 relative">
+                  <div className="aspect-square bg-olive/5  rounded-xl overflow-hidden mb-3 relative">
                      <img src="/images/collection_jars.png" alt="Signature Candles" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500" />
                   </div>
-                  <h4 className="font-serif text-olive dark:text-creme text-lg mb-1 normal-case tracking-normal">Signature Candles</h4>
-                  <p className="text-xs text-olive/60 dark:text-creme/60 normal-case tracking-normal">Our classic luxury scents</p>
+                  <h4 className="font-serif text-olive  text-lg mb-1 normal-case tracking-normal">Signature</h4>
+                  <p className="text-xs text-olive/60  normal-case tracking-normal">Classic scents</p>
+                </Link>
+                <Link href="/shop?category=Shaped+Candles" className="group/item block">
+                  <div className="aspect-square bg-olive/5  rounded-xl overflow-hidden mb-3 relative">
+                     <img src="/images/candle_rose_shaped.png" alt="Shaped Candles" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500" />
+                  </div>
+                  <h4 className="font-serif text-olive  text-lg mb-1 normal-case tracking-normal">Shaped</h4>
+                  <p className="text-xs text-olive/60  normal-case tracking-normal">Artisan crafted</p>
                 </Link>
                 <Link href="/shop?category=DIY+Kits" className="group/item block">
-                  <div className="aspect-square bg-olive/5 dark:bg-white/5 rounded-xl overflow-hidden mb-3 relative">
+                  <div className="aspect-square bg-olive/5  rounded-xl overflow-hidden mb-3 relative">
                      <img src="/images/collection_kit.png" alt="DIY Kits" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500" />
                   </div>
-                  <h4 className="font-serif text-olive dark:text-creme text-lg mb-1 normal-case tracking-normal">DIY Kits</h4>
-                  <p className="text-xs text-olive/60 dark:text-creme/60 normal-case tracking-normal">Pour your own at home</p>
+                  <h4 className="font-serif text-olive  text-lg mb-1 normal-case tracking-normal">DIY Kits</h4>
+                  <p className="text-xs text-olive/60  normal-case tracking-normal">Pour your own</p>
                 </Link>
                 <Link href="/shop?category=Raw+Materials" className="group/item block">
-                  <div className="aspect-square bg-olive/5 dark:bg-white/5 rounded-xl overflow-hidden mb-3 relative">
+                  <div className="aspect-square bg-olive/5  rounded-xl overflow-hidden mb-3 relative">
                      <img src="/images/collection_materials.png" alt="Raw Materials" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500" />
                   </div>
-                  <h4 className="font-serif text-olive dark:text-creme text-lg mb-1 normal-case tracking-normal">Raw Materials</h4>
-                  <p className="text-xs text-olive/60 dark:text-creme/60 normal-case tracking-normal">Waxes, wicks, and vessels</p>
+                  <h4 className="font-serif text-olive  text-lg mb-1 normal-case tracking-normal">Materials</h4>
+                  <p className="text-xs text-olive/60  normal-case tracking-normal">Crafting supplies</p>
                 </Link>
               </div>
             </div>
@@ -148,7 +158,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-creme pt-24 px-6 md:hidden flex flex-col"
+            className="fixed inset-0 z-40 bg-creme pt-20 px-6 md:hidden flex flex-col"
           >
             <nav className="flex flex-col gap-6 text-2xl font-serif text-olive mt-8">
               <Link href="/shop" onClick={() => setIsMobileMenuOpen(false)}>Shop Candles</Link>

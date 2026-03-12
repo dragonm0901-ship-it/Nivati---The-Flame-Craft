@@ -52,7 +52,7 @@ export default function Journals() {
                   ))}
                 </div>
                 <blockquote className="text-lg font-light leading-relaxed mb-8 italic">
-                  "{t.quote}"
+                  &quot;{t.quote}&quot;
                 </blockquote>
               </div>
               

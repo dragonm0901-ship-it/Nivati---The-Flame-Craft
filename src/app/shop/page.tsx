@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Filter, SlidersHorizontal, X } from "lucide-react";
+import { ArrowLeft, SlidersHorizontal } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import QuickViewModal from "@/components/QuickViewModal";
@@ -15,7 +15,7 @@ export default function ShopPage() {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 
-  const categories = ["All", "Signature Candles", "DIY Kits", "Raw Materials"];
+  const categories = ["All", "Signature Candles", "Shaped Candles", "Mini Candles", "Large Candles", "DIY Kits", "Raw Materials"];
 
   const filteredProducts = activeCategory === "All" 
     ? products 
@@ -28,7 +28,7 @@ export default function ShopPage() {
       onClose={() => setIsQuickViewOpen(false)} 
       product={quickViewProduct} 
     />
-    <main className="min-h-screen flex flex-col pt-24 bg-creme dark:bg-olive transition-colors duration-700">
+    <main className="min-h-screen flex flex-col pt-24 bg-creme  transition-colors duration-700">
       <Navbar />
       
       <div className="grow max-w-7xl mx-auto px-6 w-full py-12">
@@ -37,10 +37,10 @@ export default function ShopPage() {
             <Link href="/" className="inline-flex items-center gap-2 text-olive/60 hover:text-olive transition-colors mb-6 text-sm">
               <ArrowLeft className="w-4 h-4" /> Back to Home
             </Link>
-            <h1 className="text-4xl md:text-6xl font-serif text-olive dark:text-creme">All Collections</h1>
+            <h1 className="text-4xl md:text-6xl font-serif text-olive ">All Collections</h1>
           </div>
           
-          <button className="flex items-center gap-2 px-6 py-3 border border-olive/20 dark:border-creme/20 rounded-full text-olive dark:text-creme hover:bg-olive hover:text-creme dark:hover:bg-creme dark:hover:text-olive transition-colors text-sm font-medium">
+          <button className="flex items-center gap-2 px-6 py-3 border border-olive/20  rounded-full text-olive  hover:bg-olive hover:text-creme   transition-colors text-sm font-medium">
             <SlidersHorizontal className="w-4 h-4" /> Filters
           </button>
         </div>
@@ -53,8 +53,8 @@ export default function ShopPage() {
                onClick={() => setActiveCategory(cat)}
                className={`whitespace-nowrap px-6 py-2 rounded-full text-sm transition-colors ${
                  activeCategory === cat 
-                   ? 'bg-olive text-creme dark:bg-creme dark:text-olive' 
-                   : 'bg-olive/5 text-olive hover:bg-olive/10 dark:bg-creme/5 dark:text-creme dark:hover:bg-creme/10'
+                   ? 'bg-olive text-creme  ' 
+                   : 'bg-olive/5 text-olive hover:bg-olive/10   '
                }`}
              >
                {cat}
@@ -65,7 +65,7 @@ export default function ShopPage() {
         {/* Bento Grid */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[250px] md:auto-rows-[300px] mb-24">
           <AnimatePresence mode="popLayout">
-            {filteredProducts.map((product, idx) => (
+            {filteredProducts.map((product) => (
               <motion.div
                 layout
                 key={product.id}
@@ -77,13 +77,14 @@ export default function ShopPage() {
               >
                 <Link href={`/shop/${product.id}`} className="block h-full w-full">
                   <div
-                    className="group relative rounded-3xl overflow-hidden cursor-pointer bg-olive/5 dark:bg-creme/5 h-full w-full block"
+                    className="group relative rounded-3xl overflow-hidden cursor-pointer bg-olive/5  h-full w-full block"
                   >
                 <div className="absolute inset-0 bg-olive/10 mix-blend-multiply z-10 transition-opacity duration-500 group-hover:opacity-0" style={{ transform: "translateZ(0)" }} />
                 <img 
                   src={product.img} 
                   alt={product.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 will-change-transform"
                   style={{ transform: "translateZ(0)" }}
                 />
                 
@@ -125,7 +126,7 @@ export default function ShopPage() {
                 <div className="absolute inset-x-0 bottom-0 z-20 p-6 md:p-8 bg-linear-to-t from-olive/90 via-olive/40 to-transparent flex justify-between items-end translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                   <div>
                     <h3 className="text-2xl font-serif text-creme mb-1">{product.title}</h3>
-                    <p className="text-creme/80 font-sans font-light">${product.price}</p>
+                    <p className="text-creme/80 font-sans font-light">Rs {product.price}</p>
                   </div>
                   <div className="w-12 h-12 rounded-full bg-creme text-olive flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-105">
                     <ArrowLeft className="w-5 h-5 rotate-135" />

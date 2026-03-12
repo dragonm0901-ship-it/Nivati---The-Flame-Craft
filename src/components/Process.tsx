@@ -37,8 +37,8 @@ export default function Process() {
   return (
     <section ref={containerRef} className="py-32 bg-creme relative overflow-hidden" id="story">
       {/* Abstract floating shapes linked to scroll */}
-      <motion.div style={{ y: yParallax }} className="absolute -left-32 top-1/4 w-96 h-96 bg-olive/5 rounded-full blur-3xl pointer-events-none" />
-      <motion.div style={{ y: yParallax }} className="absolute -right-32 bottom-1/4 w-96 h-96 bg-sage/10 rounded-full blur-3xl pointer-events-none" />
+      <motion.div style={{ y: yParallax }} className="absolute -left-32 top-1/4 w-96 h-96 bg-olive/5 rounded-full blur-3xl pointer-events-none will-change-transform" />
+      <motion.div style={{ y: yParallax }} className="absolute -right-32 bottom-1/4 w-96 h-96 bg-sage/10 rounded-full blur-3xl pointer-events-none will-change-transform" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-24">
@@ -48,7 +48,7 @@ export default function Process() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-3xl md:text-5xl font-serif text-olive mb-4"
           >
-            The Maker's Process
+            The Maker&apos;s Process
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, filter: "blur(10px)" }}

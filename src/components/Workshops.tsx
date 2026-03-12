@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+// Link import removed as it was unused
 import { PlayCircle } from "lucide-react";
 
 export default function Workshops() {

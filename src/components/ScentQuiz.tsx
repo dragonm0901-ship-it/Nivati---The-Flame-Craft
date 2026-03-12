@@ -88,11 +88,11 @@ export default function ScentQuiz({ isOpen, onClose }: ScentQuizProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-60 bg-creme dark:bg-olive flex flex-col pt-24 px-6 overflow-y-auto"
+          className="fixed inset-0 z-60 bg-creme  flex flex-col pt-24 px-6 overflow-y-auto"
         >
           <button 
             onClick={closeAndReset}
-            className="absolute top-8 right-6 md:right-12 p-2 text-olive dark:text-creme hover:bg-olive/10 dark:hover:bg-creme/10 rounded-full transition-colors z-10"
+            className="absolute top-8 right-6 md:right-12 p-2 text-olive  hover:bg-olive/10  rounded-full transition-colors z-10"
           >
             <X className="w-6 h-6" />
           </button>
@@ -108,8 +108,8 @@ export default function ScentQuiz({ isOpen, onClose }: ScentQuizProps) {
                   transition={{ duration: 0.4 }}
                   className="flex flex-col items-center"
                 >
-                  <span className="text-olive/50 dark:text-creme/50 font-serif mb-4">Step {currentStep + 1} of {questions.length}</span>
-                  <h2 className="text-3xl md:text-5xl font-serif text-olive dark:text-creme mb-12 text-center">
+                  <span className="text-olive/50  font-serif mb-4">Step {currentStep + 1} of {questions.length}</span>
+                  <h2 className="text-3xl md:text-5xl font-serif text-olive  mb-12 text-center">
                     {questions[currentStep].title}
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
@@ -117,7 +117,7 @@ export default function ScentQuiz({ isOpen, onClose }: ScentQuizProps) {
                       <button
                         key={idx}
                         onClick={() => handleAnswer(option.attribute)}
-                        className="py-6 px-8 border border-olive/20 dark:border-creme/20 rounded-2xl text-lg text-olive dark:text-creme hover:bg-olive hover:text-creme dark:hover:bg-creme dark:hover:text-olive transition-all text-center"
+                        className="py-6 px-8 border border-olive/20  rounded-2xl text-lg text-olive  hover:bg-olive hover:text-creme   transition-all text-center"
                       >
                         {option.text}
                       </button>
@@ -131,8 +131,8 @@ export default function ScentQuiz({ isOpen, onClose }: ScentQuizProps) {
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center text-center"
                 >
-                  <h2 className="text-xl text-olive/60 dark:text-creme/60 uppercase tracking-widest mb-4">Your Signature Scent is</h2>
-                  <h3 className="text-5xl md:text-7xl font-serif text-olive dark:text-creme mb-12">{resultProduct?.title}</h3>
+                  <h2 className="text-xl text-olive/60  uppercase tracking-widest mb-4">Your Signature Scent is</h2>
+                  <h3 className="text-5xl md:text-7xl font-serif text-olive  mb-12">{resultProduct?.title}</h3>
                   
                   {resultProduct && (
                     <div className="flex flex-col md:flex-row gap-12 items-center mb-12">
@@ -140,11 +140,11 @@ export default function ScentQuiz({ isOpen, onClose }: ScentQuizProps) {
                          <img src={resultProduct.img} alt={resultProduct.title} className="absolute inset-0 w-full h-full object-cover mix-blend-multiply scale-110" style={{ transform: "translateZ(0) scale(1.1)" }} />
                       </div>
                       <div className="text-left max-w-sm">
-                         <p className="text-olive/80 dark:text-creme/80 text-lg mb-6">{resultProduct.description}</p>
+                         <p className="text-olive/80  text-lg mb-6">{resultProduct.description}</p>
                          <Link 
                             href={`/shop/${resultProduct.id}`}
                             onClick={closeAndReset}
-                            className="inline-flex items-center gap-2 bg-olive text-creme dark:bg-creme dark:text-olive px-8 py-4 rounded-full hover:bg-olive/90 dark:hover:bg-creme/90 transition-colors"
+                            className="inline-flex items-center gap-2 bg-olive text-creme   px-8 py-4 rounded-full hover:bg-olive/90  transition-colors"
                          >
                             Shop this Scent <ArrowRight className="w-5 h-5" />
                          </Link>
@@ -152,7 +152,7 @@ export default function ScentQuiz({ isOpen, onClose }: ScentQuizProps) {
                     </div>
                   )}
                   
-                  <button onClick={handleReset} className="text-olive/50 hover:text-olive dark:text-creme/50 dark:hover:text-creme underline underline-offset-4">
+                  <button onClick={handleReset} className="text-olive/50 hover:text-olive   underline underline-offset-4">
                     Take Quiz Again
                   </button>
                 </motion.div>

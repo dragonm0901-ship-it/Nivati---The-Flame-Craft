@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowLeft, Minus, Plus, ShoppingBag } from "lucide-react";
+import { Minus, Plus, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -100,7 +100,7 @@ export default function ProductDetail() {
             </div>
             
             <h1 className="text-5xl md:text-6xl font-serif text-olive mb-4">{product.title}</h1>
-            <p className="text-2xl text-olive/80 mb-8">${product.price}</p>
+            <p className="text-2xl text-olive/80 mb-8">Rs {product.price}</p>
             
             <p className="text-lg leading-relaxed text-olive/80 mb-12 font-light">
               {product.description}
@@ -148,7 +148,7 @@ export default function ProductDetail() {
                 className="flex-1 bg-olive text-creme py-4 rounded-full flex items-center justify-center gap-2 hover:bg-olive/90 transition-colors"
               >
                 <ShoppingBag className="w-5 h-5" />
-                <span>Add to Cart - ${(product.price * quantity).toFixed(2)}</span>
+                <span>Add to Cart - Rs {(product.price * quantity).toFixed(0)}</span>
               </button>
             </div>
           </motion.div>
