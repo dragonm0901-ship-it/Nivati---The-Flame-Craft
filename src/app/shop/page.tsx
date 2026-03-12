@@ -37,10 +37,10 @@ export default function ShopPage() {
             <Link href="/" className="inline-flex items-center gap-2 text-olive/60 hover:text-olive transition-colors mb-6 text-sm">
               <ArrowLeft className="w-4 h-4" /> Back to Home
             </Link>
-            <h1 className="text-4xl md:text-6xl font-serif text-olive ">All Collections</h1>
+            <h1 className="text-3xl md:text-6xl font-serif text-olive ">All Collections</h1>
           </div>
           
-          <button className="flex items-center gap-2 px-6 py-3 border border-olive/20  rounded-full text-olive  hover:bg-olive hover:text-creme   transition-colors text-sm font-medium">
+          <button className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 border border-olive/20  rounded-full text-olive  hover:bg-olive hover:text-creme   transition-colors text-xs md:text-sm font-medium">
             <SlidersHorizontal className="w-4 h-4" /> Filters
           </button>
         </div>
@@ -51,7 +51,7 @@ export default function ShopPage() {
              <button 
                key={i} 
                onClick={() => setActiveCategory(cat)}
-               className={`whitespace-nowrap px-6 py-2 rounded-full text-sm transition-colors ${
+               className={`whitespace-nowrap px-4 py-1.5 md:px-6 md:py-2 rounded-full text-xs md:text-sm transition-colors ${
                  activeCategory === cat 
                    ? 'bg-olive text-creme  ' 
                    : 'bg-olive/5 text-olive hover:bg-olive/10   '
@@ -63,7 +63,7 @@ export default function ShopPage() {
         </div>
 
         {/* Bento Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[250px] md:auto-rows-[300px] mb-24">
+        <motion.div layout className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 auto-rows-[180px] md:auto-rows-[300px] mb-16 md:mb-24">
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product) => (
               <motion.div
@@ -125,8 +125,8 @@ export default function ShopPage() {
 
                 <div className="absolute inset-x-0 bottom-0 z-20 p-6 md:p-8 bg-linear-to-t from-olive/90 via-olive/40 to-transparent flex justify-between items-end translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                   <div>
-                    <h3 className="text-2xl font-serif text-creme mb-1">{product.title}</h3>
-                    <p className="text-creme/80 font-sans font-light">Rs {product.price}</p>
+                    <h3 className="text-base md:text-2xl font-serif text-creme mb-0.5 md:mb-1">{product.title}</h3>
+                    <p className="text-creme/80 font-sans font-light text-xs md:text-base">Rs {product.price}</p>
                   </div>
                   <div className="w-12 h-12 rounded-full bg-creme text-olive flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-105">
                     <ArrowLeft className="w-5 h-5 rotate-135" />

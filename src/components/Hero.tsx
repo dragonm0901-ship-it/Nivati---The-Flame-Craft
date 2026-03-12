@@ -18,34 +18,34 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          <h1 className="text-5xl md:text-7xl font-serif text-olive leading-tight">
-            Nivati <br />
-            <span className="italic relative">
+          <h1 className="font-serif text-olive leading-tight">
+            <span className="text-5xl md:text-7xl block">Nivati</span>
+            <span className="text-xl md:text-3xl italic relative inline-block mt-1">
               The Flame Craft
               <motion.span 
-                className="absolute bottom-1 left-0 w-full h-2 bg-sage/30 -z-10"
+                className="absolute bottom-0 left-0 w-full h-1.5 bg-sage/30 -z-10"
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 1, delay: 1 }}
               />
             </span>
           </h1>
-          <h2 className="text-lg md:text-xl text-olive/80 font-sans font-light leading-relaxed max-w-lg">
+          <h2 className="text-base md:text-lg text-olive/80 font-sans font-light leading-relaxed max-w-lg">
             Scented Handmade Candles
           </h2>
           
-          <div className="flex flex-wrap gap-4 pt-4">
+          <div className="flex gap-3 pt-2">
             <Link 
               href="/shop"
-              className="px-8 py-4 bg-olive text-creme rounded-full tracking-wide hover:bg-olive/90 transition-all hover:shadow-lg hover:-translate-y-1 inline-flex justify-center"
+              className="px-5 py-3 md:px-8 md:py-4 bg-olive text-creme rounded-full tracking-wide hover:bg-olive/90 transition-all hover:shadow-lg hover:-translate-y-1 inline-flex justify-center text-sm md:text-base"
             >
-              Shop the Collection
+              Shop Collection
             </Link>
             <Link 
               href="#workshops"
-              className="px-8 py-4 border border-olive text-olive rounded-full tracking-wide hover:bg-sage/10 transition-all inline-flex justify-center"
+              className="px-5 py-3 md:px-8 md:py-4 border border-olive text-olive rounded-full tracking-wide hover:bg-sage/10 transition-all inline-flex justify-center text-sm md:text-base"
             >
-              Explore Workshops
+              Workshops
             </Link>
           </div>
         </motion.div>

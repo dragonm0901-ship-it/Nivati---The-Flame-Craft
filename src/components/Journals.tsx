@@ -26,11 +26,11 @@ export default function Journals() {
   ];
 
   return (
-    <section className="py-24 bg-olive text-creme dark:bg-transparent dark:text-olive transition-colors duration-700" id="journals">
+    <section className="py-14 md:py-24 bg-olive text-creme dark:bg-transparent dark:text-olive transition-colors duration-700" id="journals">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-serif mb-4 text-creme dark:text-olive transition-colors duration-700">Customer Journals</h2>
-          <p className="font-sans font-light text-creme/70 dark:text-olive/70 max-w-xl mx-auto transition-colors duration-700">
+          <h2 className="text-2xl md:text-5xl font-serif mb-3 md:mb-4 text-creme dark:text-olive transition-colors duration-700">Customer Journals</h2>
+          <p className="font-sans font-light text-creme/70 dark:text-olive/70 max-w-xl mx-auto text-sm md:text-base transition-colors duration-700">
             Stories from our community of makers and luxury candle enthusiasts.
           </p>
         </div>
@@ -39,7 +39,7 @@ export default function Journals() {
           {testimonials.map((t, idx) => (
             <motion.div 
               key={idx}
-              className="bg-creme/5 border border-creme/10 dark:bg-olive/5 dark:border-olive/10 p-8 rounded-2xl flex flex-col justify-between transition-colors duration-700"
+              className="bg-creme/5 border border-creme/10 dark:bg-olive/5 dark:border-olive/10 p-5 md:p-8 rounded-xl md:rounded-2xl flex flex-col justify-between transition-colors duration-700"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -51,7 +51,7 @@ export default function Journals() {
                     <Star key={i} className="w-4 h-4 fill-sage text-sage" />
                   ))}
                 </div>
-                <blockquote className="text-lg font-light leading-relaxed mb-8 italic">
+                <blockquote className="text-sm md:text-lg font-light leading-relaxed mb-6 md:mb-8 italic">
                   &quot;{t.quote}&quot;
                 </blockquote>
               </div>

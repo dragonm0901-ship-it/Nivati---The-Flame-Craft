@@ -46,7 +46,16 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="max-w-7xl mx-auto px-6 h-16 md:h-18 flex items-center justify-between">
-          <Link href="/" className="flex items-center z-50 transform hover:scale-105 transition-transform duration-300">
+          <Link 
+            href="/" 
+            className="flex items-center z-50 transform hover:scale-105 transition-transform duration-300"
+            onClick={(e) => {
+              if (pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
             <img 
               src="/images/logo.png" 
               alt="Nivati Logo" 
