@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 // Link import removed as it was unused
-import { PlayCircle } from "lucide-react";
 
 export default function Workshops() {
   return (
@@ -14,23 +13,17 @@ export default function Workshops() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           <motion.div 
-            className="relative h-[500px] w-full rounded-2xl overflow-hidden group"
+            className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1 }}
           >
-            <div className="absolute inset-0 bg-olive/10 group-hover:bg-transparent transition-colors duration-500 z-10" style={{ transform: "translateZ(0)" }} />
             <img 
-              src="/images/workshop_pouring.png" 
-              alt="Hands pouring wax into a glass jar"
+              src="/images/master_the_flame.jpg" 
+              alt="Artisan pouring lavender candle wax during a workshop"
               className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <button className="w-20 h-20 bg-creme/90 backdrop-blur-sm rounded-full flex items-center justify-center text-olive hover:scale-110 transition-transform">
-                <PlayCircle className="w-10 h-10" strokeWidth={1.5} />
-              </button>
-            </div>
           </motion.div>
 
           <motion.div 

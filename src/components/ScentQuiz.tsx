@@ -16,30 +16,30 @@ const questions = [
     id: 1,
     title: "What's your ideal evening?",
     options: [
-      { text: "A quiet dinner with wine", attribute: "olive-fig" },
-      { text: "Reading by a warm fire", attribute: "sandalwood-rose" },
-      { text: "Early to bed, early to rise", attribute: "matcha-mint" },
-      { text: "A late night walk", attribute: "bergamot-woods" },
+      { text: "A quiet dinner with wine", attribute: "berry-wine" },
+      { text: "Reading by a warm fire", attribute: "rose-bloom-signature" },
+      { text: "Early to bed, early to rise", attribute: "iced-matcha" },
+      { text: "A late night walk", attribute: "concrete-moon" },
     ]
   },
   {
     id: 2,
     title: "Pick a texture",
     options: [
-      { text: "Crushed Velvet", attribute: "sandalwood-rose" },
-      { text: "Linen", attribute: "bergamot-woods" },
-      { text: "Smooth Ceramic", attribute: "matcha-mint" },
-      { text: "Raw Wood", attribute: "olive-fig" },
+      { text: "Crushed Velvet", attribute: "rose-bloom-signature" },
+      { text: "Linen", attribute: "concrete-moon" },
+      { text: "Smooth Ceramic", attribute: "iced-matcha" },
+      { text: "Raw Wood", attribute: "berry-wine" },
     ]
   },
   {
     id: 3,
     title: "Favorite environment",
     options: [
-      { text: "Mediterranean Coast", attribute: "olive-fig" },
-      { text: "Deep Forest", attribute: "bergamot-woods" },
-      { text: "Minimalist Studio", attribute: "matcha-mint" },
-      { text: "Rose Garden", attribute: "sandalwood-rose" },
+      { text: "Mediterranean Coast", attribute: "berry-wine" },
+      { text: "Deep Forest", attribute: "concrete-moon" },
+      { text: "Minimalist Studio", attribute: "iced-matcha" },
+      { text: "Rose Garden", attribute: "rose-bloom-signature" },
     ]
   }
 ];

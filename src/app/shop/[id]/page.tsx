@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useState, use } from "react";
 import { motion } from "framer-motion";
 import { Minus, Plus, ShoppingBag } from "lucide-react";
 import Link from "next/link";
@@ -13,9 +12,8 @@ import CrossSell from "@/components/CrossSell";
 import { products } from "@/lib/data";
 import { useAppContext } from "@/context/AppContext";
 
-export default function ProductDetail() {
-  const pathname = usePathname();
-  const id = pathname.split('/').pop();
+export default function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const product = products.find(p => p.id === id);
   
   const [quantity, setQuantity] = useState(1);
@@ -64,7 +62,7 @@ export default function ProductDetail() {
               <img 
                 src={product.gallery[activeImage]} 
                 alt={product.title} 
-                className="absolute inset-0 w-full h-full object-cover mix-blend-multiply transition-opacity duration-500"
+                className="absolute inset-0 w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal transition-opacity duration-500"
                 style={{ transform: "translateZ(0)" }}
               />
             </div>
@@ -76,7 +74,7 @@ export default function ProductDetail() {
                     onClick={() => setActiveImage(idx)}
                     className={`w-20 h-20 rounded-xl overflow-hidden bg-olive/5 border-2 transition-colors ${activeImage === idx ? 'border-olive' : 'border-transparent'}`}
                   >
-                    <img src={img} alt={`Gallery image ${idx+1}`} className="w-full h-full object-cover mix-blend-multiply" style={{ transform: "translateZ(0)" }} />
+                    <img src={img} alt={`Gallery image ${idx+1}`} className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" style={{ transform: "translateZ(0)" }} />
                   </button>
                 ))}
               </div>

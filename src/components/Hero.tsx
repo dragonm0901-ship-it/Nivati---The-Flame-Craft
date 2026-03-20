@@ -1,68 +1,178 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
+
+const slogans = [
+  "Scented Handmade Candles",
+  "Artisan Craftsmanship",
+  "Sustainable Luxury",
+  "Intentionally Poured"
+];
 
 export default function Hero() {
+  const [sloganIndex, setSloganIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Scroll parallax transforms
+  const rotate1 = useTransform(scrollYProgress, [0, 1], [60, 105]);
+  const rotate2 = useTransform(scrollYProgress, [0, 1], [-15, -45]);
+  const rotate3 = useTransform(scrollYProgress, [0, 1], [25, -10]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSloganIndex((prev) => (prev + 1) % slogans.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    setMousePos({
+      x: (clientX / innerWidth - 0.5) * 40,
+      y: (clientY / innerHeight - 0.5) * 40
+    });
+  };
+
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0 bg-creme">
-        {/* Subtle texture or parallax layer can be added here */}
-      </div>
+    <section 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      className="relative min-h-[90vh] lg:min-h-[95vh] flex items-center pt-20 lg:pt-24 overflow-hidden bg-creme select-none"
+    >
+      {/* Texture Overlay */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
+      
+      {/* Background abstract shapes */}
+      <div className="absolute top-0 right-0 w-full lg:w-[60%] h-full bg-sage/5 rounded-l-none lg:rounded-l-[200px] -z-10" />
+
+      {/* Floating Parallax Elements - Restricted to Desktop for performance and clarity */}
+      <motion.img 
+        src="/images/lavender_sprig.png"
+        alt=""
+        style={{ rotate: rotate1, x: mousePos.x * 0.5, y: useTransform(scrollYProgress, [0, 1], [(mousePos.y * 0.5), -150 + (mousePos.y * 0.5)]) }}
+        className="absolute top-[15%] left-[5%] w-32 h-auto opacity-60 blur-[0.5px] pointer-events-none z-20 hidden lg:block mix-blend-multiply dark:mix-blend-screen dark:invert dark:hue-rotate-180"
+      />
+      <motion.img 
+        src="/images/orange_slice.png"
+        alt=""
+        style={{ rotate: rotate2, x: mousePos.x * -0.8, y: useTransform(scrollYProgress, [0, 1], [(mousePos.y * -0.8), -300 + (mousePos.y * -0.8)]) }}
+        className="absolute bottom-[20%] left-[40%] w-24 h-auto opacity-50 blur-[1px] pointer-events-none z-20 hidden lg:block mix-blend-multiply dark:mix-blend-screen dark:invert dark:hue-rotate-180"
+      />
+      <motion.img 
+        src="/images/jasmine_petal.png"
+        alt=""
+        style={{ rotate: rotate3, x: mousePos.x * 1.2, y: useTransform(scrollYProgress, [0, 1], [(mousePos.y * 1.2), -150 + (mousePos.y * 1.2)]) }}
+        className="absolute top-[40%] left-[25%] w-12 h-auto opacity-70 pointer-events-none z-20 hidden lg:block mix-blend-multiply dark:mix-blend-screen dark:invert dark:hue-rotate-180"
+      />
 
       <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center relative z-10">
-        <motion.div 
-          className="flex flex-col gap-6 max-w-2xl"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          <h1 className="font-serif text-olive leading-tight">
-            <span className="text-5xl md:text-7xl block">Nivati</span>
-            <span className="text-xl md:text-3xl italic relative inline-block mt-1">
-              The Flame Craft
+        <div className="flex flex-col gap-8 lg:gap-10 text-center lg:text-left">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative"
+          >
+            {/* Editorial Heading Design */}
+            <h1 className="font-serif text-olive leading-none">
+              <span className="text-6xl md:text-8xl lg:text-[11rem] block tracking-tighter mix-blend-multiply">
+                Nivati
+              </span>
               <motion.span 
-                className="absolute bottom-0 left-0 w-full h-1.5 bg-sage/30 -z-10"
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 1, delay: 1 }}
-              />
-            </span>
-          </h1>
-          <h2 className="text-base md:text-lg text-olive/80 font-sans font-light leading-relaxed max-w-lg">
-            Scented Handmade Candles
-          </h2>
-          
-          <div className="flex gap-3 pt-2">
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                className="text-lg md:text-2xl lg:text-4xl italic font-light relative inline-block mt-2 lg:-mt-8 lg:ml-2 text-sage whitespace-nowrap"
+              >
+                The Flame Craft
+              </motion.span>
+            </h1>
+          </motion.div>
+
+          {/* Interactive Slogan Reveal */}
+          <div className="h-8 lg:h-12 overflow-hidden relative">
+            <AnimatePresence mode="wait">
+              <motion.p 
+                key={sloganIndex}
+                initial={{ y: 20, opacity: 0, filter: "blur(5px)" }}
+                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                exit={{ y: -20, opacity: 0, filter: "blur(5px)" }}
+                transition={{ duration: 0.8, ease: "circOut" }}
+                className="text-lg lg:text-2xl text-olive/70 font-sans font-light tracking-widest uppercase"
+              >
+                {slogans[sloganIndex]}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
+          <motion.div 
+            className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-2 lg:pt-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 1 }}
+          >
             <Link 
               href="/shop"
-              className="px-5 py-3 md:px-8 md:py-4 bg-olive text-creme rounded-full tracking-wide hover:bg-olive/90 transition-all hover:shadow-lg hover:-translate-y-1 inline-flex justify-center text-sm md:text-base"
+              className="group relative px-8 py-4 bg-olive text-creme rounded-full overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_rgba(40,54,24,0.3)] text-center"
             >
-              Shop Collection
+              <span className="relative z-10 font-medium tracking-wide">Shop Collection</span>
+              <motion.div 
+                className="absolute inset-0 bg-sage scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" 
+              />
             </Link>
             <Link 
               href="#workshops"
-              className="px-5 py-3 md:px-8 md:py-4 border border-olive text-olive rounded-full tracking-wide hover:bg-sage/10 transition-all inline-flex justify-center text-sm md:text-base"
+              className="px-8 py-4 border border-olive/30 text-olive rounded-full tracking-wide hover:bg-sage/10 transition-all duration-300 font-light text-center"
             >
-              Workshops
+              Learn the Craft
             </Link>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          {/* Luxury Badge */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ delay: 1.5, duration: 1 }}
+            className="pt-6 lg:pt-8 border-t border-olive/10 flex justify-center lg:justify-start items-center gap-6"
+          >
+            <div className="flex flex-col lg:flex-row gap-2 lg:gap-6">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-olive font-bold">Small Batches</span>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-olive font-bold">Pure Soy Wax</span>
+            </div>
+          </motion.div>
+        </div>
 
         <motion.div 
-          className="relative h-[60vh] lg:h-[80vh] w-full rounded-2xl overflow-hidden"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.4 }}
+          className="relative h-[45vh] lg:h-[85vh] w-full mt-8 lg:mt-0"
+          initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1.5, ease: "circOut" }}
         >
-          {/* Use a placeholder image from generic high quality sources */}
-          <div className="absolute inset-0 bg-sage/20 mix-blend-multiply z-10" style={{ transform: "translateZ(0)" }} />
-          <img 
-            src="/images/hero_candle.png" 
-            alt="Hand-poured Nivati candle with dried botanicals"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+          {/* Image Container with subtle floating animation */}
+          <motion.div 
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="relative h-full w-full rounded-[30px] lg:rounded-[40px] overflow-hidden shadow-2xl border-4 lg:border-[12px] border-white/50 backdrop-blur-md"
+          >
+            <div className="absolute inset-0 bg-sage/10 mix-blend-multiply z-10" />
+            <img 
+              src="/images/IMG_4136.jpg" 
+              alt="Hand-poured Nivati candle lifestyle"
+              className="absolute inset-0 w-full h-full object-cover scale-110"
+            />
+          </motion.div>
+          
+          {/* Decorative floating square */}
+          <div className="absolute -bottom-4 -right-4 lg:-bottom-8 lg:-right-8 w-24 h-24 lg:w-48 lg:h-48 bg-olive rounded-2xl lg:rounded-3xl -z-10 shadow-2xl opacity-20 blur-xl lg:blur-2xl" />
         </motion.div>
       </div>
     </section>

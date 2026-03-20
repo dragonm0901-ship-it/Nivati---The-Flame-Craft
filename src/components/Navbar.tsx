@@ -59,7 +59,7 @@ export default function Navbar() {
             <img 
               src="/images/logo.png" 
               alt="Nivati Logo" 
-              className="h-10 w-10 md:h-12 md:w-12 object-contain   transition-all" 
+              className="h-10 w-10 md:h-12 md:w-12 object-contain transition-all dark:invert dark:opacity-80" 
             />
           </Link>
           
@@ -74,28 +74,28 @@ export default function Navbar() {
               <div className="absolute top-full -left-12 w-[800px] bg-creme  shadow-2xl rounded-2xl p-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 grid grid-cols-4 gap-6 translate-y-4 group-hover:translate-y-0 border border-olive/10  z-50">
                 <Link href="/shop?category=Signature+Candles" className="group/item block">
                   <div className="aspect-square bg-olive/5  rounded-xl overflow-hidden mb-3 relative">
-                     <img src="/images/collection_jars.png" alt="Signature Candles" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500" />
+                     <img src="/images/IMG_4142.jpg" alt="Signature Candles" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500 mix-blend-multiply dark:mix-blend-normal" />
                   </div>
                   <h4 className="font-serif text-olive  text-lg mb-1 normal-case tracking-normal">Signature</h4>
                   <p className="text-xs text-olive/60  normal-case tracking-normal">Classic scents</p>
                 </Link>
                 <Link href="/shop?category=Shaped+Candles" className="group/item block">
                   <div className="aspect-square bg-olive/5  rounded-xl overflow-hidden mb-3 relative">
-                     <img src="/images/candle_rose_shaped.png" alt="Shaped Candles" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500" />
+                     <img src="/images/candle_rose_shaped.png" alt="Shaped Candles" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500 mix-blend-multiply dark:mix-blend-normal" />
                   </div>
                   <h4 className="font-serif text-olive  text-lg mb-1 normal-case tracking-normal">Shaped</h4>
                   <p className="text-xs text-olive/60  normal-case tracking-normal">Artisan crafted</p>
                 </Link>
                 <Link href="/shop?category=DIY+Kits" className="group/item block">
                   <div className="aspect-square bg-olive/5  rounded-xl overflow-hidden mb-3 relative">
-                     <img src="/images/collection_kit.png" alt="DIY Kits" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500" />
+                     <img src="/images/collection_kit.png" alt="DIY Kits" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500 mix-blend-multiply dark:mix-blend-normal" />
                   </div>
                   <h4 className="font-serif text-olive  text-lg mb-1 normal-case tracking-normal">DIY Kits</h4>
                   <p className="text-xs text-olive/60  normal-case tracking-normal">Pour your own</p>
                 </Link>
                 <Link href="/shop?category=Raw+Materials" className="group/item block">
                   <div className="aspect-square bg-olive/5  rounded-xl overflow-hidden mb-3 relative">
-                     <img src="/images/collection_materials.png" alt="Raw Materials" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500" />
+                     <img src="/images/collection_materials.png" alt="Raw Materials" className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500 mix-blend-multiply dark:mix-blend-normal" />
                   </div>
                   <h4 className="font-serif text-olive  text-lg mb-1 normal-case tracking-normal">Materials</h4>
                   <p className="text-xs text-olive/60  normal-case tracking-normal">Crafting supplies</p>

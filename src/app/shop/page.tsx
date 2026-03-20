@@ -15,7 +15,7 @@ export default function ShopPage() {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 
-  const categories = ["All", "Signature Candles", "Shaped Candles", "Mini Candles", "Large Candles", "DIY Kits", "Raw Materials"];
+  const categories = ["All", "Signature Candles", "Concrete Jar Candles", "Basic Jar Candles", "Mould Candles", "Premium Jar Candles", "Gel&Soy Jar", "Mini Jar", "Concrete Pots", "Candle Making Kit", "Candle Making"];
 
   const filteredProducts = activeCategory === "All" 
     ? products 
@@ -46,7 +46,7 @@ export default function ShopPage() {
         </div>
 
         {/* Categories Bar */}
-        <div className="flex gap-4 overflow-x-auto pb-6 mb-8 scrollbar-hide">
+        <div className="flex flex-wrap gap-4 pb-6 mb-8">
           {categories.map((cat, i) => (
              <button 
                key={i} 

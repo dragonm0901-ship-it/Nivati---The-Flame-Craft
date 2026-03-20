@@ -17,13 +17,13 @@ export default function WholesalePage() {
            <img 
              src="/images/hero_candle.png" 
              alt="Candle" 
-             className="absolute inset-0 w-full h-full object-cover mix-blend-multiply" 
+             className="absolute inset-0 w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" 
              style={{ transform: "translateZ(0)" }}
            />
         </div>
         
         <h1 className="text-3xl md:text-5xl font-serif text-olive mb-6">
-          Sorry ! This page is still in Development
+          We are currently refining our wholesale experience
         </h1>
         
         <button 
