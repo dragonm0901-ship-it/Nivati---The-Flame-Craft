@@ -11,8 +11,16 @@ const slogans = [
   "Intentionally Poured"
 ];
 
+const heroImages = [
+  { src: "/images/IMG_4136.jpg", alt: "Hand-poured Nivati candle lifestyle" },
+  { src: "/images/IMG_4133.jpg", alt: "Cactus Jar Premium Candle" },
+  { src: "/images/IMG_4147.jpg", alt: "Jack Daniels Whiskeysilicone gel candle" },
+  { src: "/images/IMG_4069.jpg", alt: "Large Concrete Bowl Candle" }
+];
+
 export default function Hero() {
   const [sloganIndex, setSloganIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -30,7 +38,16 @@ export default function Hero() {
     const timer = setInterval(() => {
       setSloganIndex((prev) => (prev + 1) % slogans.length);
     }, 4000);
-    return () => clearInterval(timer);
+    
+    // Gallery auto-play
+    const galleryTimer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 2500);
+
+    return () => {
+      clearInterval(timer);
+      clearInterval(galleryTimer);
+    };
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -46,7 +63,7 @@ export default function Hero() {
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-[90vh] lg:min-h-[95vh] flex items-center pt-20 lg:pt-24 overflow-hidden bg-creme select-none"
+      className="relative min-h-[90vh] lg:min-h-[95vh] flex items-center pt-20 lg:pt-24 pb-20 lg:pb-0 overflow-hidden bg-creme select-none"
     >
       {/* Texture Overlay */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
@@ -145,31 +162,50 @@ export default function Hero() {
             className="pt-6 lg:pt-8 border-t border-olive/10 flex justify-center lg:justify-start items-center gap-6"
           >
             <div className="flex flex-col lg:flex-row gap-2 lg:gap-6">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-olive font-bold">Small Batches</span>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-olive font-bold">Handmade with Love</span>
               <span className="text-[10px] uppercase tracking-[0.3em] text-olive font-bold">Pure Soy Wax</span>
             </div>
           </motion.div>
         </div>
 
         <motion.div 
-          className="relative h-[45vh] lg:h-[85vh] w-full mt-8 lg:mt-0"
+          className="relative h-[40vh] lg:h-[75vh] w-full mt-4 lg:mt-0"
           initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
           transition={{ duration: 1.5, ease: "circOut" }}
         >
-          {/* Image Container with subtle floating animation */}
-          <motion.div 
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          {/* Image Container with continuous loop gallery */}
+          <div 
             className="relative h-full w-full rounded-[30px] lg:rounded-[40px] overflow-hidden shadow-2xl border-4 lg:border-[12px] border-white/50 backdrop-blur-md"
           >
-            <div className="absolute inset-0 bg-sage/10 mix-blend-multiply z-10" />
-            <img 
-              src="/images/IMG_4136.jpg" 
-              alt="Hand-poured Nivati candle lifestyle"
-              className="absolute inset-0 w-full h-full object-cover scale-110"
-            />
-          </motion.div>
+            <div className="absolute inset-0 bg-sage/10 mix-blend-multiply z-10 pointer-events-none" />
+            
+            <AnimatePresence>
+              <motion.img 
+                key={currentImageIndex}
+                src={heroImages[currentImageIndex].src} 
+                alt={heroImages[currentImageIndex].alt}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.0, ease: "easeInOut" }}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </AnimatePresence>
+
+            {/* Gallery Navigation Dots */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+              {heroImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentImageIndex(i)}
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
+                    currentImageIndex === i ? "bg-white w-4" : "bg-white/40"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
           
           {/* Decorative floating square */}
           <div className="absolute -bottom-4 -right-4 lg:-bottom-8 lg:-right-8 w-24 h-24 lg:w-48 lg:h-48 bg-olive rounded-2xl lg:rounded-3xl -z-10 shadow-2xl opacity-20 blur-xl lg:blur-2xl" />

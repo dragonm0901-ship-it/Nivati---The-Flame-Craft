@@ -66,21 +66,36 @@ export default function CartDrawer() {
                     
                     <div className="flex-1 flex flex-col justify-between">
                       <div className="flex justify-between items-start gap-2">
-                        <h3 className="font-serif text-lg text-olive  leading-tight">{item.title}</h3>
+                        <div className="flex-1">
+                          <h3 className="font-serif text-lg text-olive  leading-tight mb-1">{item.title}</h3>
+                          {item.metadata && (
+                            <div className="space-y-1">
+                              <div className="flex gap-2 text-[10px] uppercase tracking-widest text-olive/40">
+                                {item.metadata.color && <span>Color: {item.metadata.color}</span>}
+                                {item.metadata.fragrance && <span>Scent: {item.metadata.fragrance}</span>}
+                              </div>
+                              {item.metadata.message && (
+                                <p className="text-xs text-olive/60 font-light italic truncate max-w-[200px]">
+                                  &quot;{item.metadata.message}&quot;
+                                </p>
+                              )}
+                            </div>
+                          )}
+                        </div>
                         <p className="font-medium text-olive ">Rs {(item.price * item.quantity).toFixed(0)}</p>
                       </div>
                       
-                      <div className="flex items-center justify-between mt-auto">
+                      <div className="flex items-center justify-between mt-4">
                         <div className="flex items-center border border-olive/20  rounded-full bg-transparent">
                           <button 
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            onClick={() => updateQuantity(item.id, item.quantity - 1, item.metadata)}
                             className="w-8 h-8 flex items-center justify-center text-olive  hover:bg-olive/10  rounded-full transition-colors"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
                           <span className="w-6 text-center text-sm">{item.quantity}</span>
                           <button 
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            onClick={() => updateQuantity(item.id, item.quantity + 1, item.metadata)}
                             className="w-8 h-8 flex items-center justify-center text-olive  hover:bg-olive/10  rounded-full transition-colors"
                           >
                             <Plus className="w-3 h-3" />
@@ -88,7 +103,7 @@ export default function CartDrawer() {
                         </div>
                         
                         <button 
-                          onClick={() => removeFromCart(item.id)}
+                          onClick={() => removeFromCart(item.id, item.metadata)}
                           className="text-xs uppercase tracking-wider text-olive/60  hover:text-olive  underline underline-offset-4"
                         >
                           Remove
@@ -112,11 +127,17 @@ export default function CartDrawer() {
                 </p>
                 <a 
                   href={`https://wa.me/9779842003249?text=${encodeURIComponent(
-                    `🕯️ *New Order from Nivati Website*\n` +
-                    cart.map((item, i) => 
-                      `${i + 1}. *${item.title}*\n   Qty: ${item.quantity} × Rs ${item.price} = Rs ${(item.price * item.quantity).toFixed(0)}`
-                    ).join('\n') +
-                    `\n---\n💰 *Subtotal: Rs ${subtotal.toFixed(0)}*\nPlease confirm availability and share delivery details. 🙏\n\n*Note*: Please note that prices do not include the delivery charges. Delivery charges will be added to grand total according to the delivery locations.`
+                    `🕯️ *New Order from Nivati Website*\n\n` +
+                    cart.map((item, i) => {
+                      let itemText = `${i + 1}. *${item.title}*\n   Qty: ${item.quantity} × Rs ${item.price} = Rs ${(item.price * item.quantity).toFixed(0)}`;
+                      if (item.metadata) {
+                        if (item.metadata.color) itemText += `\n   Color: ${item.metadata.color}`;
+                        if (item.metadata.fragrance) itemText += `\n   Fragrance: ${item.metadata.fragrance}`;
+                        if (item.metadata.message) itemText += `\n   Message: "${item.metadata.message}"`;
+                      }
+                      return itemText;
+                    }).join('\n\n') +
+                    `\n\n---\n💰 *Subtotal: Rs ${subtotal.toFixed(0)}*\n\nPlease confirm availability and share delivery details. 🙏\n\n*Note*: Please note that prices do not include the delivery charges. Delivery charges will be added to grand total according to the delivery locations.`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"

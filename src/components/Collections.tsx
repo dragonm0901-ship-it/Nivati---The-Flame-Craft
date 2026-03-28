@@ -50,10 +50,28 @@ export default function Collections() {
       span: "md:col-span-1 lg:col-span-1",
     },
     {
+      title: "Concrete Jars",
+      description: "Architectural designs in minimalist concrete.",
+      image: "/images/IMG_4070.PNG",
+      span: "md:col-span-1 lg:col-span-1",
+    },
+    {
       title: "The Beginner's Kit",
       description: "All-in-one box to start your candle journey.",
       image: "/images/IMG_4201.jpg",
       span: "md:col-span-2 lg:col-span-2 row-span-2",
+    },
+    {
+      title: "Premium Collection",
+      description: "Exquisite scents in our signature glass vessels.",
+      image: "/images/IMG_4095.jpg",
+      span: "md:col-span-1 lg:col-span-1",
+    },
+    {
+      title: "Gel & Soy Blends",
+      description: "A unique fusion of clarity and creamy wax.",
+      image: "/images/IMG_4133.jpg",
+      span: "md:col-span-1 lg:col-span-1",
     },
   ];
 

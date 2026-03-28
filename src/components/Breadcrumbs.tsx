@@ -8,7 +8,7 @@ interface BreadcrumbItem {
 
 export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <nav className="flex items-center gap-2 text-xs md:text-sm text-olive/60  uppercase tracking-widest mb-8 z-10 relative flex-wrap">
+    <nav className="flex items-center gap-1.5 md:gap-2 text-[10px] md:text-sm text-olive/60 uppercase tracking-widest mb-6 md:mb-8 z-10 relative flex-nowrap overflow-x-auto scrollbar-hide">
       <Link href="/" className="hover:text-olive  transition-colors">
         Home
       </Link>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,26 +11,27 @@ import QuickViewModal from "@/components/QuickViewModal";
 
 import { products, Product } from "@/lib/data";
 
-export default function ShopPage() {
-  const [activeCategory, setActiveCategory] = useState("All");
+function ShopContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const activeCategory = searchParams.get("category") || "All";
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 
-  const categories = ["All", "Signature Candles", "Concrete Jar Candles", "Basic Jar Candles", "Mould Candles", "Premium Jar Candles", "Gel&Soy Jar", "Mini Jar", "Concrete Pots & More", "Candle Making Kit", "Candle Making"];
+  const categories = ["All", "Signature Candles", "Concrete Jar Candles", "Basic Jar Candles", "Mould Candles", "Premium Jar Candles", "Gel&Soy Jar", "Mini Jar", "Concrete Pots & More", "Candle Making Kit", "Candle Making Materials"];
 
   const filteredProducts = activeCategory === "All" 
     ? products 
     : products.filter(p => p.category === activeCategory);
 
   return (
-    <>
-    <QuickViewModal 
-      isOpen={isQuickViewOpen} 
-      onClose={() => setIsQuickViewOpen(false)} 
-      product={quickViewProduct} 
-    />
     <main className="min-h-screen flex flex-col pt-24 bg-creme  transition-colors duration-700">
       <Navbar />
+      <QuickViewModal 
+        isOpen={isQuickViewOpen} 
+        onClose={() => setIsQuickViewOpen(false)} 
+        product={quickViewProduct} 
+      />
       
       <div className="grow max-w-7xl mx-auto px-6 w-full py-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
@@ -46,7 +48,15 @@ export default function ShopPage() {
           {categories.map((cat, i) => (
              <button 
                key={i} 
-               onClick={() => setActiveCategory(cat)}
+               onClick={() => {
+                 const params = new URLSearchParams(searchParams.toString());
+                 if (cat === "All") {
+                   params.delete("category");
+                 } else {
+                   params.set("category", cat);
+                 }
+                 router.push(`/shop?${params.toString()}`, { scroll: false });
+               }}
                className={`whitespace-nowrap px-4 py-1.5 md:px-6 md:py-2 rounded-full text-xs md:text-sm transition-colors ${
                  activeCategory === cat 
                    ? 'bg-olive text-creme  ' 
@@ -138,6 +148,13 @@ export default function ShopPage() {
       
       <Footer />
     </main>
-    </>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-creme flex items-center justify-center"><h2 className="text-olive font-serif text-2xl animate-pulse">Loading Collection...</h2></div>}>
+      <ShopContent />
+    </Suspense>
   );
 }

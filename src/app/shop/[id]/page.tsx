@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import StickyBuyBar from "@/components/StickyBuyBar";
 import CrossSell from "@/components/CrossSell";
-import { products } from "@/lib/data";
+import { products, COLORS, FRAGRANCES } from "@/lib/data";
 import { useAppContext } from "@/context/AppContext";
 
 export default function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
@@ -18,6 +18,9 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
   
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
+  const [selectedColor, setSelectedColor] = useState(COLORS[0].name);
+  const [selectedFragrance, setSelectedFragrance] = useState(FRAGRANCES[0]);
+  const [specialMessage, setSpecialMessage] = useState("");
   const { addToCart } = useAppContext();
 
   if (!product) {
@@ -29,13 +32,20 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
     );
   }
 
+  const showPersonalization = !["Concrete Pots & More", "Candle Making Kit", "Candle Making Materials"].includes(product.category);
+
   const handleAddToCart = () => {
     addToCart({
       id: product.id,
       title: product.title,
       price: product.price,
       quantity,
-      image: product.img
+      image: product.img,
+      metadata: {
+        color: selectedColor,
+        fragrance: selectedFragrance,
+        message: specialMessage
+      }
     });
   };
 
@@ -69,13 +79,13 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
             {product.gallery.length > 1 && (
               <div className="flex gap-4">
                 {product.gallery.map((img, idx) => (
-                  <button 
-                    key={idx}
-                    onClick={() => setActiveImage(idx)}
-                    className={`w-20 h-20 rounded-xl overflow-hidden bg-olive/5 border-2 transition-colors ${activeImage === idx ? 'border-olive' : 'border-transparent'}`}
-                  >
-                    <img src={img} alt={`Gallery image ${idx+1}`} className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" style={{ transform: "translateZ(0)" }} />
-                  </button>
+                   <button 
+                     key={idx}
+                     onClick={() => setActiveImage(idx)}
+                     className={`w-20 h-20 rounded-xl overflow-hidden bg-olive/5 border-2 transition-colors ${activeImage === idx ? 'border-olive' : 'border-transparent'}`}
+                   >
+                     <img src={img} alt={`Gallery image ${idx+1}`} className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" style={{ transform: "translateZ(0)" }} />
+                   </button>
                 ))}
               </div>
             )}
@@ -97,41 +107,109 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
               <span className="text-olive/60 text-sm uppercase tracking-widest">{product.category}</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-serif text-olive mb-4">{product.title}</h1>
-            <p className="text-2xl text-olive/80 mb-8">Rs {product.price}</p>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-olive mb-4 leading-tight">{product.title}</h1>
+            <p className="text-2xl text-olive/80 mb-8 font-serif">Rs {product.price}</p>
             
-            <p className="text-lg leading-relaxed text-olive/80 mb-12 font-light">
+            <p className="text-lg leading-relaxed text-olive/80 mb-10 font-light max-w-lg">
               {product.description}
             </p>
 
-            <div className="space-y-6 border-y border-olive/10 py-8 mb-12">
-              <div className="grid grid-cols-[100px_1fr] gap-4">
-                <span className="text-sm uppercase tracking-widest text-olive/50">Top Notes</span>
-                <span className="text-olive/90">{product.scentNotes.top}</span>
+            {/* Personalization UI */}
+            {showPersonalization ? (
+              <div className="space-y-10 border-y border-olive/10 py-10 mb-10">
+                {/* Color Selection */}
+                <div>
+                  <label className="text-xs uppercase tracking-widest text-olive/40 block mb-6 px-1">Choose Jar Color</label>
+                  <div className="flex flex-wrap gap-4">
+                    {COLORS.map((color) => (
+                      <button
+                        key={color.name}
+                        onClick={() => setSelectedColor(color.name)}
+                        className={`relative w-12 h-12 rounded-full border-2 transition-all p-1 group flex items-center justify-center ${
+                          selectedColor === color.name ? 'border-olive scale-110' : 'border-transparent hover:scale-105'
+                        }`}
+                        aria-label={color.name}
+                      >
+                        <div 
+                          className="w-full h-full rounded-full shadow-inner"
+                          style={{ background: color.hex }}
+                        />
+                        <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-olive/40 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                          {color.name}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Fragrance Selection */}
+                <div>
+                  <label className="text-xs uppercase tracking-widest text-olive/40 block mb-6 px-1">Select Fragrance</label>
+                  <div className="flex flex-wrap gap-2 md:gap-3">
+                    {FRAGRANCES.map((fragrance) => (
+                      <button
+                        key={fragrance}
+                        onClick={() => setSelectedFragrance(fragrance)}
+                        className={`px-5 py-2.5 rounded-full text-sm transition-all border ${
+                          selectedFragrance === fragrance
+                            ? 'bg-olive text-creme border-olive shadow-md'
+                            : 'bg-transparent text-olive/70 border-olive/10 hover:border-olive/30 hover:bg-olive/5'
+                        }`}
+                      >
+                        {fragrance}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Special Message */}
+                <div>
+                  <label className="text-xs uppercase tracking-widest text-olive/40 block mb-6 px-1">Special Message / Notes</label>
+                  <textarea
+                    value={specialMessage}
+                    onChange={(e) => setSpecialMessage(e.target.value)}
+                    placeholder="Special messages, notes, custom colors, fragrances..."
+                    className="w-full bg-olive/5 border border-olive/10 rounded-2xl p-6 text-olive md:text-lg focus:outline-none focus:border-sage transition-colors placeholder:text-olive/20 resize-none"
+                    rows={3}
+                  />
+                </div>
               </div>
-              <div className="grid grid-cols-[100px_1fr] gap-4">
-                <span className="text-sm uppercase tracking-widest text-olive/50">Mid Notes</span>
-                <span className="text-olive/90">{product.scentNotes.mid}</span>
-              </div>
-              <div className="grid grid-cols-[100px_1fr] gap-4">
-                <span className="text-sm uppercase tracking-widest text-olive/50">Base Notes</span>
-                <span className="text-olive/90">{product.scentNotes.base}</span>
-              </div>
-            </div>
+            ) : (
+              /* Non-personalizable details */
+              (product.scentNotes.top !== "Unscented" && product.scentNotes.top !== "Customize your own") && (
+                <div className="mb-10 p-8 bg-olive/5 rounded-3xl border border-olive/10">
+                  <h4 className="font-serif text-xl text-olive mb-6">Product Details</h4>
+                  <ul className="space-y-4 text-sm md:text-base font-light text-olive/80">
+                    <li className="flex gap-4 border-b border-olive/5 pb-3">
+                      <span className="w-20 font-medium text-olive/50 uppercase tracking-widest text-[10px]">Top:</span> 
+                      <span className="font-medium">{product.scentNotes.top}</span>
+                    </li>
+                    <li className="flex gap-4 border-b border-olive/5 pb-3">
+                      <span className="w-20 font-medium text-olive/50 uppercase tracking-widest text-[10px]">Mid:</span> 
+                      <span className="font-medium">{product.scentNotes.mid}</span>
+                    </li>
+                    <li className="flex gap-4 pb-3">
+                      <span className="w-20 font-medium text-olive/50 uppercase tracking-widest text-[10px]">Base:</span> 
+                      <span className="font-medium">{product.scentNotes.base}</span>
+                    </li>
+                  </ul>
+                </div>
+              )
+            )}
 
             {/* Add to Cart Area */}
-            <div className="flex items-center gap-6">
-              <div className="flex items-center border border-olive/20 rounded-full bg-transparent p-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 md:gap-6">
+              <div className="flex items-center justify-between border border-olive/20 rounded-full bg-transparent p-1 min-w-[140px]">
                 <button 
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 flex items-center justify-center text-olive hover:bg-olive/10 rounded-full transition-colors"
+                  className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-olive hover:bg-olive/10 rounded-full transition-colors"
                 >
                   <Minus className="w-4 h-4" />
                 </button>
-                <span className="w-8 text-center text-lg">{quantity}</span>
+                <span className="w-10 text-center text-lg font-medium">{quantity}</span>
                 <button 
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 flex items-center justify-center text-olive hover:bg-olive/10 rounded-full transition-colors"
+                  className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-olive hover:bg-olive/10 rounded-full transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                 </button>
@@ -139,7 +217,7 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
               
               <button 
                 onClick={handleAddToCart}
-                className="flex-1 bg-olive text-creme py-4 rounded-full flex items-center justify-center gap-2 hover:bg-olive/90 transition-colors"
+                className="w-full sm:flex-1 bg-olive text-creme py-4 md:py-5 rounded-full flex items-center justify-center gap-2 hover:bg-olive/90 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-olive/10"
               >
                 <ShoppingBag className="w-5 h-5" />
                 <span>Add to Cart - Rs {(product.price * quantity).toFixed(0)}</span>

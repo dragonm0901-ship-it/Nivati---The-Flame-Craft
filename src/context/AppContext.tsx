@@ -8,13 +8,18 @@ export interface CartItem {
   price: number;
   quantity: number;
   image: string;
+  metadata?: {
+    color?: string;
+    fragrance?: string;
+    message?: string;
+  };
 }
 
 interface AppContextType {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
+  removeFromCart: (id: string, metadata?: CartItem['metadata']) => void;
+  updateQuantity: (id: string, quantity: number, metadata?: CartItem['metadata']) => void;
   isCartOpen: boolean;
   setIsCartOpen: (isOpen: boolean) => void;
   isNightMode: boolean;
@@ -39,27 +44,40 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const addToCart = (newItem: CartItem) => {
     setCart((prev) => {
-      const existing = prev.find((item) => item.id === newItem.id);
+      // Create a unique key for comparing items (ID + metadata)
+      const getUniqueKey = (item: CartItem) => 
+        `${item.id}-${item.metadata?.color || 'default'}-${item.metadata?.fragrance || 'default'}-${item.metadata?.message || ''}`;
+
+      const existing = prev.find((item) => getUniqueKey(item) === getUniqueKey(newItem));
+
       if (existing) {
         return prev.map((item) =>
-          item.id === newItem.id ? { ...item, quantity: item.quantity + newItem.quantity } : item
+          getUniqueKey(item) === getUniqueKey(newItem) 
+            ? { ...item, quantity: item.quantity + newItem.quantity } 
+            : item
         );
       }
       return [...prev, newItem];
     });
-    setIsCartOpen(true); // Auto open cart on add
+    setIsCartOpen(true);
   };
 
-  const removeFromCart = (id: string) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+  const removeFromCart = (id: string, metadata?: CartItem['metadata']) => {
+    const getUniqueKey = (id: string, meta?: CartItem['metadata']) => 
+      `${id}-${meta?.color || 'default'}-${meta?.fragrance || 'default'}-${meta?.message || ''}`;
+
+    setCart((prev) => prev.filter((item) => getUniqueKey(item.id, item.metadata) !== getUniqueKey(id, metadata)));
   };
 
-  const updateQuantity = (id: string, quantity: number) => {
+  const updateQuantity = (id: string, quantity: number, metadata?: CartItem['metadata']) => {
     if (quantity < 1) {
-      removeFromCart(id);
+      removeFromCart(id, metadata);
       return;
     }
-    setCart((prev) => prev.map((item) => (item.id === id ? { ...item, quantity } : item)));
+    const getUniqueKey = (id: string, meta?: CartItem['metadata']) => 
+      `${id}-${meta?.color || 'default'}-${meta?.fragrance || 'default'}-${meta?.message || ''}`;
+
+    setCart((prev) => prev.map((item) => (getUniqueKey(item.id, item.metadata) === getUniqueKey(id, metadata) ? { ...item, quantity } : item)));
   };
 
   return (

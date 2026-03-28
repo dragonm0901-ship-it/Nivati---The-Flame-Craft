@@ -56,8 +56,12 @@ export default function Experience() {
               variants={item}
               className="group flex flex-col items-center text-center p-8 rounded-2xl border border-olive/10 hover:border-olive/20 hover:bg-olive/5 transition-all duration-500"
             >
-              <div className="w-16 h-16 rounded-full bg-olive/5 flex items-center justify-center mb-6 group-hover:bg-olive/10 transition-colors">
-                <feature.icon className="w-8 h-8 text-olive" strokeWidth={1.5} />
+              <div className="flex items-center justify-center mb-6">
+                <feature.icon 
+                  size={38} 
+                  className="text-olive" 
+                  strokeWidth={1.5} 
+                />
               </div>
               <h3 className="text-xl font-serif text-olive mb-3">{feature.title}</h3>
               <p className="text-olive/70 font-sans font-light leading-relaxed">
