@@ -63,7 +63,7 @@ export default function Hero() {
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-[90vh] lg:min-h-[95vh] flex items-center pt-20 lg:pt-24 pb-20 lg:pb-0 overflow-hidden bg-creme select-none"
+      className="relative min-h-[90vh] lg:min-h-[95vh] flex items-center pt-24 lg:pt-32 pb-20 lg:pb-0 overflow-hidden bg-creme select-none"
     >
       {/* Texture Overlay */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />

@@ -45,7 +45,7 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="max-w-7xl mx-auto px-6 h-16 md:h-18 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
           <Link 
             href="/" 
             className="flex items-center z-50 transform hover:scale-105 transition-transform duration-300"
@@ -59,7 +59,7 @@ export default function Navbar() {
             <img 
               src="/images/logo.png" 
               alt="Nivati Logo" 
-              className="h-10 w-10 md:h-12 md:w-12 object-contain transition-all dark:invert dark:opacity-80" 
+              className="h-15 w-15 md:h-18 md:w-18 object-contain transition-all dark:invert dark:opacity-80" 
             />
           </Link>
           

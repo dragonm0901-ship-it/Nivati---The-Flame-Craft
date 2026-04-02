@@ -6,13 +6,18 @@ import { products } from "@/lib/data";
 
 interface Props {
   currentProductId: string;
-  category: string;
+  category: string | string[];
 }
 
 export default function CrossSell({ currentProductId, category }: Props) {
   // Find related products in the same category, excluding the current one, limit to 4
   const recommendations = products
-    .filter(p => p.category === category && p.id !== currentProductId)
+    .filter(p => {
+      const pCats = Array.isArray(p.category) ? p.category : [p.category];
+      const targetCats = Array.isArray(category) ? category : [category];
+      const isRelated = pCats.some(cat => targetCats.includes(cat));
+      return isRelated && p.id !== currentProductId;
+    })
     .slice(0, 4);
 
   // If we don't have enough in the category, backfill with best sellers
@@ -30,7 +35,7 @@ export default function CrossSell({ currentProductId, category }: Props) {
       <div className="flex justify-between items-end mb-12">
         <div>
           <h2 className="text-3xl md:text-5xl font-serif text-olive  mb-4">You May Also Like</h2>
-          <p className="text-olive/60 ">Explore more from our {category.toLowerCase()} collection.</p>
+          <p className="text-olive/60 ">Explore more from our {Array.isArray(category) ? category[0].toLowerCase() : category.toLowerCase()} collection.</p>
         </div>
         <Link href="/shop" className="hidden md:inline-flex text-sm uppercase tracking-widest text-olive  hover:opacity-70 transition-opacity items-center gap-2">
           View All <ArrowLeft className="w-4 h-4 rotate-180" />
@@ -50,7 +55,7 @@ export default function CrossSell({ currentProductId, category }: Props) {
               />
             </div>
             <div>
-              <span className="text-xs uppercase tracking-widest text-olive/50  mb-2 block">{product.category}</span>
+              <span className="text-xs uppercase tracking-widest text-olive/50  mb-2 block">{Array.isArray(product.category) ? product.category.join(" / ") : product.category}</span>
               <div className="flex justify-between items-center">
                 <h3 className="text-xl font-serif text-olive ">{product.title}</h3>
                 <span className="text-olive/80 ">Rs {product.price}</span>

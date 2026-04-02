@@ -9,7 +9,7 @@ export default function ShippingPolicyPage() {
   const router = useRouter();
   
   return (
-    <main className="min-h-screen flex flex-col pt-24 bg-creme">
+    <main className="min-h-screen flex flex-col pt-32 bg-creme">
       <Navbar />
       
       <div className="grow flex flex-col items-center justify-center max-w-2xl mx-auto px-6 text-center py-20">

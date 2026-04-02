@@ -30,11 +30,14 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
 
   const results = query.trim() === "" 
     ? [] 
-    : products.filter(p => 
-        p.title.toLowerCase().includes(query.toLowerCase()) || 
-        p.category.toLowerCase().includes(query.toLowerCase()) ||
-        p.description.toLowerCase().includes(query.toLowerCase())
-      );
+    : products.filter(p => {
+        const categoryMatch = Array.isArray(p.category) 
+          ? p.category.some(c => c.toLowerCase().includes(query.toLowerCase()))
+          : p.category.toLowerCase().includes(query.toLowerCase());
+        return p.title.toLowerCase().includes(query.toLowerCase()) || 
+               categoryMatch ||
+               p.description.toLowerCase().includes(query.toLowerCase());
+      });
 
   return (
     <AnimatePresence>
@@ -91,7 +94,7 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
                       <img src={product.img} alt={product.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <div>
-                      <span className="text-xs uppercase tracking-widest text-olive/50 ">{product.category}</span>
+                      <span className="text-xs uppercase tracking-widest text-olive/50 ">{Array.isArray(product.category) ? product.category.join(", ") : product.category}</span>
                       <h4 className="text-xl font-serif text-olive ">{product.title}</h4>
                       <p className="text-olive/80 ">Rs {product.price}</p>
                     </div>

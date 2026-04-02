@@ -12,7 +12,7 @@ export interface Product {
     mid: string;
     base: string;
   };
-  category: string;
+  category: string | string[];
 }
 
 export const products: Product[] = [
@@ -31,22 +31,6 @@ export const products: Product[] = [
       top: "Vanilla",
       mid: "Honey, Cream",
       base: "Tonka Bean, Musk"
-    },
-  },
-  {
-    id: "rose-bloom-signature",
-    title: "Rose Bloom",
-    price: 349,
-    sizeTag: "col-span-1 row-span-1",
-    img: "/images/IMG_4315.jpg",
-    gallery: ["/images/IMG_4315.jpg"],
-    tag: "",
-    category: "Mould Candles",
-    description: "A stunning hand-sculpted rose candle with layered petals. Perfect as a gift or decorative centerpiece with real rose essence fragrance.",
-    scentNotes: {
-      top: "Rose Petals, Lavender",
-      mid: "Peony, Pink Peppercorn",
-      base: "Soft Musk, Tonka"
     },
   },
   {
@@ -123,7 +107,7 @@ export const products: Product[] = [
     img: "/images/IMG_4550.jpg",
     gallery: ["/images/IMG_4550.jpg"],
     tag: "",
-    category: "Signature Candles",
+    category: ["Signature Candles", "Concrete Jar Candles"],
     description: "A stunning moon-shaped concrete jar candle. Perfect for celestial lovers and modern minimalist spaces. Hand-poured with premium soy wax.",
     scentNotes: {
       top: "Moonflower, Bergamot",
@@ -150,7 +134,7 @@ export const products: Product[] = [
   {
     id: "starfish-name",
     title: "Starfish Name Candle",
-    price: 849,
+    price: 699,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4518.jpg",
     gallery: ["/images/IMG_4518.jpg"],  
@@ -198,12 +182,12 @@ export const products: Product[] = [
   {
     id: "rose-bowl-candle",
     title: "Rose Bowl Candle",
-    price: 849,
+    price: 899,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4086.jpg",
     gallery: ["/images/IMG_4086.jpg"],
     tag: "",
-    category: "Signature Candles",
+    category: ["Signature Candles", "Concrete Jar Candles"],
     description: "A romantic rose-infused bowl candle in concrete finish. Perfect for creating an intimate and elegant atmosphere in any room.",
     scentNotes: {
       top: "Fresh Rose, Pink Peppercorn",
@@ -267,7 +251,7 @@ export const products: Product[] = [
     img: "/images/IMG_4067.jpg",
     gallery: ["/images/IMG_4067.jpg"],
     tag: "",
-    category: "Signature Candles",
+    category: ["Signature Candles", "Concrete Jar Candles"],
     description: "A large nested bowl-style concrete jar candle. Perfect for statement pieces and creating dramatic ambiance.",
     scentNotes: {
       top: "Cedarwood, Vetiver",
@@ -283,7 +267,7 @@ export const products: Product[] = [
     img: "/images/IMG_4069.jpg",
     gallery: ["/images/IMG_4069.jpg"],
     tag: "",
-    category: "Signature Candles",
+    category: ["Signature Candles", "Concrete Jar Candles"],
     description: "An expansive concrete bowl candle with premium scent. A luxurious focal point for any room.",
     scentNotes: {
       top: "Bergamot, Grapefruit",
@@ -321,6 +305,22 @@ export const products: Product[] = [
       top: "Fresh Tulip, Bergamot",
       mid: "Floral Blend, Rose",
       base: "Cedarwood, Musk"
+    },
+  },
+  {
+    id: "heart-bowl-concrete",
+    title: "Heart Bowl Candle",
+    price: 899,
+    sizeTag: "col-span-1 row-span-1",
+    img: "/images/IMG_4643.jpg",
+    gallery: ["/images/IMG_4643.jpg"],
+    tag: "",
+    category: "Concrete Jar Candles",
+    description: "A beautifully crafted heart-shaped concrete bowl candle. Perfect for romantic occasions or as a heartfelt gift to someone special.",
+    scentNotes: {
+      top: "Vanilla, Rose",
+      mid: "Jasmine, Ylang-Ylang",
+      base: "Sandalwood, Musk"
     },
   },
 
@@ -440,22 +440,6 @@ export const products: Product[] = [
     },
   },
   {
-    id: "teddy-bear-large",
-    title: "Teddy Bear Large",
-    price: 649,
-    sizeTag: "col-span-1 row-span-1",
-    img: "/images/IMG_3917.JPG",
-    gallery: ["/images/IMG_4142.jpg"],
-    tag: "",
-    category: "Mould Candles",
-    description: "An adorable large teddy bear candle, ideal for children's rooms or as a charming gift. Crafted with care and scented with warm vanilla.",
-    scentNotes: {
-      top: "Vanilla",
-      mid: "Honey, Cream",
-      base: "Tonka Bean, Musk"
-    },
-  },
-  {
     id: "rose-peony-small",
     title: "Rose Peony Small",
     price: 299,
@@ -570,7 +554,7 @@ export const products: Product[] = [
   {
     id: "bubble-pillar",
     title: "Bubble Pillar",
-    price: 349,
+    price: 499,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4100.jpg",
     gallery: ["/images/IMG_4100.jpg"],
@@ -760,38 +744,6 @@ export const products: Product[] = [
     },
   },
   {
-    id: "cake",
-    title: "Cake",
-    price: 699,
-    sizeTag: "col-span-1 row-span-1",
-    img: "/images/IMG_4094.jpg",
-    gallery: ["/images/IMG_4094.jpg"],
-    tag: "",
-    category: "Mould Candles",
-    description: "A beautifully detailed cake candle with frosting swirls and decorative elements. Too pretty to light, but scented with sweet vanilla cake fragrance.",
-    scentNotes: {
-      top: "Vanilla, Sugar",
-      mid: "Buttercream, Caramel",
-      base: "Tonka Bean, Musk"
-    },
-  },
-  {
-    id: "fairy-house",
-    title: "Fairy House",
-    price: 599,
-    sizeTag: "col-span-1 row-span-1",
-    img: "/images/IMG_1078.jpg",
-    gallery: ["/images/IMG_1078.jpg"],
-    tag: "",
-    category: "Mould Candles",
-    description: "A magical fairy house candle with intricate architectural details. Perfect for creating an enchanted atmosphere in any room.",
-    scentNotes: {
-      top: "Floral, Bergamot",
-      mid: "Rose, Lily, Honeysuckle",
-      base: "Musk, Cedarwood"
-    },
-  },
-  {
     id: "acanthus-pillar-candle",
     title: "Acanthus Pillar Candle",
     price: 349,
@@ -876,7 +828,7 @@ export const products: Product[] = [
   {
     id: "strawberry-wine-premium",
     title: "Strawberry Wine",
-    price: 1149,
+    price: 1249,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4335.jpg",
     gallery: ["/images/IMG_4335.jpg"],
@@ -924,7 +876,7 @@ export const products: Product[] = [
   {
     id: "rose-jar-candle",
     title: "Rose Jar Candle",
-    price: 1149,
+    price: 999,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4143.jpg",
     gallery: ["/images/IMG_4143.jpg"],
@@ -940,7 +892,7 @@ export const products: Product[] = [
   {
     id: "couple-jar-candle",
     title: "Couple Jar Candle",
-    price: 1149,
+    price: 999,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4091.jpg",
     gallery: ["/images/IMG_4091.jpg"],
@@ -1018,22 +970,6 @@ export const products: Product[] = [
     },
   },
   {
-    id: "coffee-jar",
-    title: "Coffee Jar",
-    price: 899,
-    sizeTag: "col-span-1 row-span-1",
-    img: "/images/IMG_4136.jpg",
-    gallery: ["/images/IMG_4136.jpg"],
-    tag: "",
-    category: "Premium Jar Candles",
-    description: "A sophisticated coffee-scented premium candle. Perfect for coffee lovers and morning rituals.",
-    scentNotes: {
-      top: "Fresh Coffee, Citrus",
-      mid: "Roasted Notes, Caramel",
-      base: "Vanilla, Cedarwood"
-    },
-  },
-  {
     id: "strawberry-jar",
     title: "Strawberry Jar",
     price: 1249,
@@ -1047,22 +983,6 @@ export const products: Product[] = [
       top: "Fresh Strawberry",
       mid: "Berry, Cream",
       base: "Vanilla, Musk"
-    },
-  },
-  {
-    id: "rainbow-jar",
-    title: "Rainbow Jar",
-    price: 1249,
-    sizeTag: "col-span-1 row-span-1",
-    img: "/images/IMG_4077.jpg",
-    gallery: ["/images/IMG_4077.jpg"],
-    tag: "",
-    category: "Premium Jar Candles",
-    description: "A vibrant multi-colored rainbow candle with layered fragrances. Visually stunning and aromatic.",
-    scentNotes: {
-      top: "Citrus, Berry, Florals",
-      mid: "Mixed Fruit Notes",
-      base: "Musk, Cedarwood"
     },
   },
   {
@@ -1102,7 +1022,7 @@ export const products: Product[] = [
   {
     id: "iced-strawberry",
     title: "Strawberry Iced Matcha",
-    price: 999,
+    price: 1249,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4327.jpg",
     gallery: ["/images/IMG_4327.jpg"],
@@ -1118,7 +1038,7 @@ export const products: Product[] = [
   {
     id: "iced-blueberry",
     title: "Blueberry Iced Matcha",
-    price: 999,
+    price: 1249,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4325.jpg",
     gallery: ["/images/IMG_4325.jpg"],
@@ -1212,6 +1132,22 @@ export const products: Product[] = [
     },
   },
   {
+    id: "heart-delight",
+    title: "Heart Delight",
+    price: 899,
+    sizeTag: "col-span-1 row-span-1",
+    img: "/images/IMG_4644.jpg",
+    gallery: ["/images/IMG_4644.jpg"],
+    tag: "",
+    category: "Gel&Soy Jar",
+    description: "A delightful heart-themed gel and soy candle, combining visual elegance with a sweet, comforting aroma. Perfect for creating a loving atmosphere and celebrating special moments.",
+    scentNotes: {
+      top: "Sweet Berry, Citrus",
+      mid: "Vanilla, Floral",
+      base: "Musk, Amber"
+    },
+  },
+  {
     id: "mango-matcha-gel-soy",
     title: "Mango Matcha",
     price: 1249,
@@ -1230,7 +1166,7 @@ export const products: Product[] = [
   {
     id: "love-cocktail-gel-soy",
     title: "Love Cocktail",
-    price: 1249,
+    price: 1399,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4542.jpg",
     gallery: ["/images/IMG_4542.jpg"],
@@ -1476,7 +1412,7 @@ export const products: Product[] = [
   {
     id: "candle-kit-full-set",
     title: "Full Set",
-    price: 7999,
+    price: 7499,
     sizeTag: "col-span-1 md:col-span-2 row-span-2",
     img: "/images/IMG_4201.jpg",
     gallery: ["/images/IMG_4201.jpg"],
@@ -1492,7 +1428,7 @@ export const products: Product[] = [
   {
     id: "candle-kit-customized",
     title: "Customized Set",
-    price: 999,
+    price: 0,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4187.PNG",
     gallery: ["/images/IMG_4187.PNG"],
@@ -1526,7 +1462,7 @@ export const products: Product[] = [
   {
     id: "pure-soy-wax",
     title: "Pure Soy Wax",
-    price: 820,
+    price: 899,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4171.jpg",
     gallery: ["/images/IMG_4171.jpg"],
@@ -1542,7 +1478,7 @@ export const products: Product[] = [
   {
     id: "gel-wax",
     title: "Gel Wax",
-    price: 900,
+    price: 915,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4174.jpg",
     gallery: ["/images/IMG_4174.jpg"],
@@ -1558,7 +1494,7 @@ export const products: Product[] = [
   {
     id: "heart-mould",
     title: "Heart Mould",
-    price: 375,
+    price: 399,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4181.JPG",
     gallery: ["/images/IMG_4181.JPG"],
@@ -1670,7 +1606,7 @@ export const products: Product[] = [
   {
     id: "thank-you-stickers",
     title: "Thank You Stickers",
-    price: 500,
+    price: 499,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4529.jpg",
     gallery: ["/images/IMG_4529.jpg"],
@@ -1718,10 +1654,10 @@ export const products: Product[] = [
   {
     id: "fragrance-oil",
     title: "Fragrance",
-    price: 299,
+    price: 699,
     sizeTag: "col-span-1 row-span-1",
-    img: "/images/IMG_4538.jpg",
-    gallery: ["/images/IMG_4538.jpg"],
+    img: "/images/IMG_4636.jpg",
+    gallery: ["/images/IMG_4636.jpg"],
     tag: "",
     category: "Candle Making Materials",
     description: "High-quality fragrance oils for personalized scent creation (199-799).",
@@ -1749,8 +1685,8 @@ export const products: Product[] = [
   },
   {
     id: "warning-sticker-materials",
-    title: "Warning Sticker",
-    price: 30,
+    title: "Warning Stickers",
+    price: 999,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4548.PNG",
     gallery: ["/images/IMG_4548.PNG"],
@@ -1782,7 +1718,7 @@ export const products: Product[] = [
   {
     id: "lid-jar",
     title: "Lid Jar",
-    price: 57,
+    price: 60,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4163.jpg",
     gallery: ["/images/IMG_4163.jpg"],
@@ -1814,7 +1750,7 @@ export const products: Product[] = [
   {
     id: "mould-sunflower",
     title: "Sunflower Mould",
-    price: 550,
+    price: 549,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4374.JPG",
     gallery: ["/images/IMG_4374.JPG"],
@@ -1830,7 +1766,7 @@ export const products: Product[] = [
   {
     id: "mould-daisy",
     title: "Daisy Mould",
-    price: 550,
+    price: 499,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4372.JPG",
     gallery: ["/images/IMG_4372.JPG"],
@@ -1862,7 +1798,7 @@ export const products: Product[] = [
   {
     id: "wick-standard",
     title: "Candle Wick",
-    price: 35,
+    price: 12,
     sizeTag: "col-span-1 row-span-1",
     img: "/images/IMG_4376.JPG",
     gallery: ["/images/IMG_4376.JPG"],

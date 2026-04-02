@@ -88,7 +88,7 @@ export default function ScentQuiz({ isOpen, onClose }: ScentQuizProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-60 bg-creme  flex flex-col pt-24 px-6 overflow-y-auto"
+          className="fixed inset-0 z-60 bg-creme  flex flex-col pt-32 px-6 overflow-y-auto"
         >
           <button 
             onClick={closeAndReset}

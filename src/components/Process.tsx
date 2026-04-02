@@ -24,13 +24,13 @@ export default function Process() {
       number: "02",
       title: "Precision Blending",
       description: "Every fragrance is meticulously tested for the perfect balance of cold and hot throw, making sure your space is always delightfully scented.",
-      image: "/images/process_blending.png"
+      image: "/images/process_making_new.png"
     },
     {
       number: "03",
       title: "The Nivati Finish",
       description: "Hand-poured, hand-labeled, and cured to perfection. Each candle is a testament to the artisan's dedication to the craft.",
-      image: "/images/process_finish.png"
+      image: "/images/IMG_4078.jpg"
     }
   ];
 

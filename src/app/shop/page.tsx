@@ -22,10 +22,10 @@ function ShopContent() {
 
   const filteredProducts = activeCategory === "All" 
     ? products 
-    : products.filter(p => p.category === activeCategory);
+    : products.filter(p => Array.isArray(p.category) ? p.category.includes(activeCategory) : p.category === activeCategory);
 
   return (
-    <main className="min-h-screen flex flex-col pt-24 bg-creme  transition-colors duration-700">
+    <main className="min-h-screen flex flex-col pt-32 bg-creme  transition-colors duration-700">
       <Navbar />
       <QuickViewModal 
         isOpen={isQuickViewOpen} 

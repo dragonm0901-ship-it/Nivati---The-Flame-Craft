@@ -32,7 +32,9 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
     );
   }
 
-  const showPersonalization = !["Concrete Pots & More", "Candle Making Kit", "Candle Making Materials"].includes(product.category);
+  const showPersonalization = !["Concrete Pots & More", "Candle Making Kit", "Candle Making Materials"].some(cat => 
+    Array.isArray(product.category) ? product.category.includes(cat) : product.category === cat
+  );
 
   const handleAddToCart = () => {
     addToCart({
@@ -50,13 +52,16 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
   };
 
   return (
-    <main className="min-h-screen flex flex-col pt-24">
+    <main className="min-h-screen flex flex-col pt-32">
       <Navbar />
       
       <div className="grow max-w-7xl mx-auto px-6 w-full py-12 md:py-24">
         <Breadcrumbs items={[
           { label: 'Shop', href: '/shop' },
-          { label: product.category, href: `/shop?category=${encodeURIComponent(product.category)}` },
+          { 
+            label: Array.isArray(product.category) ? product.category[0] : product.category, 
+            href: `/shop?category=${encodeURIComponent(Array.isArray(product.category) ? product.category[0] : product.category)}` 
+          },
           { label: product.title }
         ]} />
         
@@ -104,7 +109,9 @@ export default function ProductDetail({ params }: { params: Promise<{ id: string
                    {product.tag}
                  </span>
               )}
-              <span className="text-olive/60 text-sm uppercase tracking-widest">{product.category}</span>
+              <span className="text-olive/60 text-sm uppercase tracking-widest">
+                {Array.isArray(product.category) ? product.category.join(" / ") : product.category}
+              </span>
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-olive mb-4 leading-tight">{product.title}</h1>

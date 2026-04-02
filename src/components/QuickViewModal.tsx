@@ -39,7 +39,9 @@ export default function QuickViewModal({ product, isOpen, onClose }: Props) {
 
   if (!product) return null;
 
-  const showPersonalization = !["Concrete Pots & More", "Candle Making Kit", "Candle Making Materials"].includes(product.category);
+  const showPersonalization = !["Concrete Pots & More", "Candle Making Kit", "Candle Making Materials"].some(cat => 
+    Array.isArray(product.category) ? product.category.includes(cat) : product.category === cat
+  );
 
   const handleAddToCart = () => {
     addToCart({
@@ -97,7 +99,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: Props) {
             {/* Content Section */}
             <div className="flex-1 md:w-1/2 p-8 lg:p-12 overflow-y-auto scrollbar-hide flex flex-col">
               <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-olive/30 mb-3 block">
-                {product.category}
+                {Array.isArray(product.category) ? product.category.join(" / ") : product.category}
               </span>
               <h2 className="text-3xl lg:text-4xl font-serif text-olive mb-4 leading-tight">
                 {product.title}
